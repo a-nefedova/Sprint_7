@@ -13,6 +13,7 @@ class TestOrder:
     @allure.link(URLs.ORDER)
     @pytest.mark.parametrize('color', OrderData.colors)
     def test_order_scooter_colors(self, color):
+
         OrderData.order_data['color'] = color
         response = post_request_order(OrderData.order_data)
 
@@ -21,6 +22,7 @@ class TestOrder:
     @allure.title('Проверяем, что в тело ответа возвращается список заказов')
     @allure.link(URLs.ORDER)
     def test_get_orders_list(self):
+
         response = get_request_orders()
 
         assert type(response.json()["orders"]) == list
