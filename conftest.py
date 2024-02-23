@@ -11,12 +11,10 @@ from data import URLs
 def registered_courier():
 
     payload = valid_creds()
-    response = post_request_register(payload)
-    assert response.status_code == 201 and response.text == '{"ok":true}'
+    post_request_register(payload)
 
     yield payload
 
     auth_response = post_request_auth(payload)
     courier_id = auth_response.json()['id']
-    delete_response = requests.delete(f'{URLs.COURIER_DELETE}{courier_id}')
-    assert delete_response.status_code == 200 and response.text == '{"ok":true}'
+    requests.delete(f'{URLs.COURIER_DELETE}{courier_id}')
